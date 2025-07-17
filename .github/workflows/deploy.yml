@@ -36,7 +36,7 @@ jobs:
         run: |
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/seuusuario/ms-users-infra.git
+          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/ArturBatista/ms-users-infra.git
           cd ms-users-infra
           sed -i "s|image: .*/ms-users:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ms-users:${{ env.RELEASE_TAG }}|g" apps/ms-users/base/deployment.yaml
           git commit -am "Update ms-users image to tag ${{ env.RELEASE_TAG }}"
