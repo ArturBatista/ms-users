@@ -6,7 +6,7 @@ app = Flask(__name__)
 def get_user():
     user = {
         "id": 1,
-        "name": "João Silva V02",
+        "name": "João Silva V03",
         "email": "joao.silva@example.com"
     }
     return jsonify(user)
