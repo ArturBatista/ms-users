@@ -1,0 +1,29 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t ms-users:latest .
+
+      - name: Push to local Docker registry
+        run: echo "Pulando push externo, pois é local"
+
+      - name: Update deployment
+        run: |
+          sed -i "s|image:.*|image: ms-users:latest|g" k8s/deployment.yaml
+          git config --global user.email "you@example.com"
+          git config --global user.name "GitHub Actions"
+          git commit -am "Update image tag"
+          git push
